@@ -8,7 +8,6 @@ services:
 
 env:
   global:
-    - OAUTH_PROXY_VERSION=v2.2
     - secure: "V361uoHuMIjcvaxysKBdSmWyM9rDQHc14liZQGn1FpaVh85dPt11S00H+IZ+XPpNGZyu8rDpne7SyNBMpj8Bne9VFNOVVuG0DGZrXTWj31EkYVKlK0H93Hh1J39GItKvr5M7/awQ/JzbeO5PezUDqVQ8rZEiXcbjUNW40C9PR09f0i9Op39js7AS/Sx5QhC1LKIH+pjH0O14FXMjfvDGF3Zf0o8At+E/NamDTwKmSxAN1k70srge0G61vMQTjxPQyxJxBJYfM3JpTgczahS2S9G39a6VOi5tXir3Gfbjbra89KXNreFbS7YLAXOfpNR0m552J6Sdm7g8JNAjLxnmBWDVaxXADNmHJELhcwKi5xPZqdom4+w5uRGF42S4ZjDbaWvDRAogV66c454ecj677hvs92+pYJAZ0xO0CaWcYCnz6tJma4wWhW3xeU+yoYnsV8W4X4xiIram8rBlQVv7bFVU4FNRhWvDWEnS0usQNbyABe4to5MLNW56k+thB4vdtm/ATopN1EYV8y5z7ci5ntNwk9M26qe8WSDswKpRFxbrXXxsF6hIOFQs0zXBdM76NJ4CP6wNKwr5UObCO/cTt8cPDhovBCjyiIvM7OSD7t8GobABPxyGYfcqIhT2TvHen1OKLZMOrjumgb45Zv99Dt3zzmqfYdJrD4kZPZWdgK8="
 
 before_install: # update to 17.09 to get COPY --from (multistage builds)
@@ -18,8 +17,8 @@ before_install: # update to 17.09 to get COPY --from (multistage builds)
   - sudo apt-get -y install docker-ce
 
 script:
-  - make VERSION=${OAUTH_PROXY_VERSION} build test
+  - make build test
 
 after_success:
   - docker login -u="${DOCKER_USERNAME:?}" -p="${DOCKER_PASSWORD:?}";
-  - make VERSION=${OAUTH_PROXY_VERSION} push
+  - make push

@@ -1,9 +1,9 @@
 IMG_NAME=xjjo/oauth2_proxy
-VERSION=latest
+VERSION=v2.2
 IMG_FULL_NAME=$(IMG_NAME):$(VERSION)
 
 build:
-	docker build -t $(IMG_FULL_NAME) .
+	docker build --build-arg SRC_TAG=$(VERSION) -t $(IMG_FULL_NAME) .
 
 # Smoke test oauth2_proxy to start and log listening... banner
 test:
