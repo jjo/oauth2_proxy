@@ -5,7 +5,7 @@ https://github.com/a5huynh/oauth2_proxy, with Dockerfile changes to:
 * Build from [bitly OAuth Proxy](https://github.com/bitly/oauth2_proxy) **source**.
 * Multistage build, to reduce final binary size
 * Run as non-root
-* Travis-CI automated build, pushed to http://dockerhub.com/r/xjjo/auth2_proxy
+* Travis-CI automated build, pushed to https://hub.docker.com/r/xjjo/oauth2_proxy/
 
 
 ## oauth2_proxy dockerization (original README.md)
