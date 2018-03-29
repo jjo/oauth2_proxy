@@ -18,8 +18,8 @@ before_install: # update to 17.09 to get COPY --from (multistage builds)
   - sudo apt-get -y install docker-ce
 
 script:
-  - docker build -t xjjo/oauth2_proxy:${OAUTH_PROXY_VERSION} .
+  - make VERSION=${OAUTH_PROXY_VERSION} build test
 
 after_success:
   - docker login -u="${DOCKER_USERNAME:?}" -p="${DOCKER_PASSWORD:?}";
-  - docker push xjjo/oauth2_proxy:${OAUTH_PROXY_VERSION}
+  - make VERSION=${OAUTH_PROXY_VERSION} push
