@@ -1,5 +1,13 @@
-## oauth2_proxy dockerization
 
+This is https://github.com/xjjo/oauth2_proxy clone of
+https://github.com/a5huynh/oauth2_proxy, with Dockerfile changes to:
+* Build from [bitly OAuth Proxy](https://github.com/bitly/oauth2_proxy) **source**.
+* Multistage build, to reduce final binary size
+* Run as non-root
+* Travis-CI automated build, pushed to http://dockerhub.com/r/xjjo/auth2_proxy
+
+
+## oauth2_proxy dockerization (original README.md)
 This is a Dockerization of the handy dandy
 [bitly OAuth Proxy](https://github.com/bitly/oauth2_proxy).
 
