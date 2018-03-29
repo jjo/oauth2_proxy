@@ -4,10 +4,7 @@ ARG SRC_REPO=github.com/bitly/oauth2_proxy
 ARG SRC_TAG=HEAD
 ARG BINARY=oauth2_proxy
 
-RUN apk update && apk add ca-certificates
-
-ENV GOPATH=/gopath
-ENV PATH=$GOPATH/bin:$PATH
+RUN apk update && apk add git ca-certificates
 
 # Unfortunately bitly/oauth2_proxy is not vendored - FYI built OK on 2018-03-29
 # Checkout specific version
@@ -20,7 +17,7 @@ MAINTAINER JuanJo Ciarlante <juanjosec@gmail.com>
 
 USER 1001
 EXPOSE 8080 4180
-COPY --from=build /gopath/bin/oauth2_proxy /opt/oauth2_proxy/bin/oauth2_proxy
+COPY --from=build /go/bin/oauth2_proxy /opt/oauth2_proxy/bin/oauth2_proxy
 COPY --from=build /etc/ssl/certs /etc/ssl/certs
 COPY --from=build /usr/share/ca-certificates /usr/share/ca-certificates
 
