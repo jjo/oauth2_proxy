@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/jjo/oauth2_proxy.svg?branch=master)](https://travis-ci.org/jjo/oauth2_proxy)
 
 This is https://github.com/xjjo/oauth2_proxy clone of
 https://github.com/a5huynh/oauth2_proxy, with Dockerfile changes to:
