@@ -25,5 +25,5 @@ COPY --from=build /gopath/bin/${BINARY} /opt/bitnami/${BINARY}/bin/${BINARY}
 COPY --from=build /etc/ssl/certs /etc/ssl/certs
 COPY --from=build /usr/share/ca-certificates /usr/share/ca-certificates
 
-ENTRYPOINT [ "/opt/bitnami/${BINARY}/bin/${BINARY}" ]
+ENTRYPOINT [ "/opt/bitnami/oauth2_proxy/bin/oauth2_proxy" ]
 CMD [ "--upstream=http://0.0.0.0:8080/", "--http-address=0.0.0.0:4180" ]
