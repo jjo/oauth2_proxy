@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/jjo/oauth2_proxy.svg?branch=master)](https://travis-ci.org/jjo/oauth2_proxy)
 
-This is https://github.com/xjjo/oauth2_proxy clone of
+This is https://github.com/jjo/oauth2_proxy clone of
 https://github.com/a5huynh/oauth2_proxy, with Dockerfile changes to:
 * Build from [bitly OAuth Proxy](https://github.com/bitly/oauth2_proxy) **source**.
 * Multistage build, to reduce final binary size
