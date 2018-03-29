@@ -21,9 +21,9 @@ MAINTAINER Bitnami SRE <sre@bitnami.com>
 
 USER 1001
 EXPOSE 8080 4180
-COPY --from=build /gopath/bin/oauth2_proxy /opt/bitnami/oauth2_proxy/bin/oauth2_proxy
+COPY --from=build /gopath/bin/${BINARY} /opt/bitnami/${BINARY}/bin/${BINARY}
 COPY --from=build /etc/ssl/certs /etc/ssl/certs
 COPY --from=build /usr/share/ca-certificates /usr/share/ca-certificates
 
-ENTRYPOINT [ "/opt/bitnami/oauth2_proxy/bin/oauth2_proxy" ]
+ENTRYPOINT [ "/opt/bitnami/${BINARY}/bin/${BINARY}" ]
 CMD [ "--upstream=http://0.0.0.0:8080/", "--http-address=0.0.0.0:4180" ]
