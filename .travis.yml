@@ -17,9 +17,10 @@ before_install: # update to 17.09 to get COPY --from (multistage builds)
   - sudo apt-get -y install docker-ce
 
 script:
-  - make build test
-  - make build GOARCH=arm
-  - make build GOARCH=aarch64
+  - |
+    make build test
+    make build GOARCH=arm
+    make build GOARCH=aarch64
 
 after_success:
   - |
