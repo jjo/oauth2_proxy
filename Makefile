@@ -36,4 +36,4 @@ push:
 clean:
 	docker rmi $(IMG_FULL_NAME)
 
-.PHONY: build build test clean build-arch-% push-arch-%
+.PHONY: build build test clean
