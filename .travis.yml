@@ -17,7 +17,10 @@ before_install: # update to 17.09 to get COPY --from (multistage builds)
   - sudo apt-get -y install docker-ce
 
 script:
-  - make build test
+  - |
+    make build test
+    make build GOARCH=arm
+    make build GOARCH=arm64
 
 after_success:
   - |
@@ -25,4 +28,6 @@ after_success:
           "$TRAVIS_PULL_REQUEST" == false ]]; then
       docker login -u="${DOCKER_USERNAME:?}" -p="${DOCKER_PASSWORD:?}";
       make push
+      make push GOARCH=arm
+      make push GOARCH=arm64
     fi
