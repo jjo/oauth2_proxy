@@ -1,9 +1,23 @@
 IMG_NAME=xjjo/oauth2_proxy
 VERSION=v2.2
-IMG_FULL_NAME=$(IMG_NAME):$(VERSION)
+GOARCH=amd64
 
-build:
-	docker build --build-arg SRC_TAG=$(VERSION) -t $(IMG_FULL_NAME) .
+ifeq ($(GOARCH), arm)
+DOCKERFILE_SED_EXPR?=s,FROM alpine:,FROM multiarch/alpine:armhf-v,
+IMG_FULL_NAME=$(IMG_NAME):arm-$(VERSION)
+else ifeq ($(GOARCH), arm64)
+DOCKERFILE_SED_EXPR?=s,FROM alpine:,FROM multiarch/alpine:aarch64-v,
+IMG_FULL_NAME=$(IMG_NAME):arm64-$(VERSION)
+else
+DOCKERFILE_SED_EXPR?=
+IMG_FULL_NAME=$(IMG_NAME):$(VERSION)
+endif
+
+build: Dockerfile.$(GOARCH).run
+	docker build --build-arg SRC_TAG=$(VERSION) --build-arg ARCH=$(GOARCH) -t $(IMG_FULL_NAME) -f $(^) .
+
+Dockerfile.%.run: Dockerfile
+	@sed -e "$(DOCKERFILE_SED_EXPR)" Dockerfile > $(@)
 
 # Smoke test oauth2_proxy to start and log listening... banner
 test:
@@ -21,4 +35,5 @@ push:
 
 clean:
 	docker rmi $(IMG_FULL_NAME)
-.PHONY: build build test clean
+
+.PHONY: build build test clean build-arch-% push-arch-%

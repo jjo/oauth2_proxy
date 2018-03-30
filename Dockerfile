@@ -2,14 +2,15 @@ FROM golang:1.9.4-alpine as build
 
 ARG SRC_REPO=github.com/bitly/oauth2_proxy
 ARG SRC_TAG=master
+ARG ARCH=amd64
 
 RUN apk update && apk add git ca-certificates
 
 # Unfortunately bitly/oauth2_proxy is not vendored - FYI built OK on 2018-03-29
 # Checkout specific version
-RUN go get -d ${SRC_REPO}
+RUN GOARCH=${ARCH} go get -d ${SRC_REPO}
 RUN git -C ${GOPATH}/src/${SRC_REPO} checkout -b build-${SRC_TAG} ${SRC_TAG}
-RUN go get ${SRC_REPO}
+RUN GOARCH=${ARCH} go get ${SRC_REPO}
 
 FROM alpine:3.7
 MAINTAINER JuanJo Ciarlante <juanjosec@gmail.com>

@@ -18,6 +18,8 @@ before_install: # update to 17.09 to get COPY --from (multistage builds)
 
 script:
   - make build test
+  - make build GOARCH=arm
+  - make build GOARCH=aarch64
 
 after_success:
   - |
@@ -25,4 +27,6 @@ after_success:
           "$TRAVIS_PULL_REQUEST" == false ]]; then
       docker login -u="${DOCKER_USERNAME:?}" -p="${DOCKER_PASSWORD:?}";
       make push
+      make push GOARCH=arm
+      make push GOARCH=aarch64
     fi
