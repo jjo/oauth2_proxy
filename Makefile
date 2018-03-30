@@ -27,6 +27,7 @@ test:
 	  -e OAUTH2_PROXY_COOKIE_SECRET=Zm9v  \
 	  $(IMG_FULL_NAME) \
 	  --email-domain=example.com --upstream=http://127.0.0.1:8080/))
+	sleep 3
 	trap 'rc=$$?; docker rm --force $(docker_id); exit $${rc}' 0; \
 	  docker logs $(docker_id) 2>&1 | grep 'listening on 127.0.0.1:4180' && echo PASS && exit 0; echo FAIL; exit 1
 
@@ -36,4 +37,8 @@ push:
 clean:
 	docker rmi $(IMG_FULL_NAME)
 
-.PHONY: build build test clean
+multiarch-setup:
+	docker run --rm --privileged multiarch/qemu-user-static:register
+	dpkg -l qemu-user-static
+
+.PHONY: build build test clean multiarch-setup
