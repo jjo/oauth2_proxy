@@ -1,8 +1,7 @@
 FROM golang:1.9.4-alpine as build
 
 ARG SRC_REPO=github.com/bitly/oauth2_proxy
-ARG SRC_TAG=HEAD
-ARG BINARY=oauth2_proxy
+ARG SRC_TAG=master
 
 RUN apk update && apk add git ca-certificates
 
