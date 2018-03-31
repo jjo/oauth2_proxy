@@ -6,6 +6,7 @@ https://github.com/a5huynh/oauth2_proxy, with Dockerfile changes to:
 * Multistage build, to reduce final binary size
 * Run as non-root
 * Travis-CI automated build, pushed to https://hub.docker.com/r/xjjo/oauth2_proxy/
+* multi-arch builds, including arm and arm64, also pushed to -^
 
 
 ## oauth2_proxy dockerization (original README.md)
