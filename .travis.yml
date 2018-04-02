@@ -15,12 +15,16 @@ before_install: # update to 17.09 to get COPY --from (multistage builds)
   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) edge"
   - sudo apt-get update
   - sudo apt-get -y install docker-ce
+  - sudo apt-get -y install qemu-user-static
 
 script:
   - |
     make build test
     make build GOARCH=arm
     make build GOARCH=arm64
+    make multiarch-setup
+    make test GOARCH=arm
+    make test GOARCH=arm644
 
 after_success:
   - |
